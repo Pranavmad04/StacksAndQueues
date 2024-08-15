@@ -1,0 +1,28 @@
+class Solution {
+    static String postToInfix(String exp) {
+        // code here
+        int i = 0;
+        Stack<String> st = new Stack<>();
+        int n = exp.length();
+        while(i<n){
+            char c = exp.charAt(i);
+            String s = String.valueOf(c);
+            if(Character.isLetterOrDigit(c)){
+                st.push(s);
+            }
+            else{
+                String t1 = st.pop();
+                String t2 = st.pop();
+                String con = ')' + t1 + c + t2 + '(';
+                st.push(con);
+            }
+            i++;
+        }
+        String result = st.pop();
+        return reverse(result);
+    }
+    static String reverse(String s){
+        StringBuilder sb = new StringBuilder(s);
+        return sb.reverse().toString();
+    }
+}
